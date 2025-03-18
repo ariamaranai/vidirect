@@ -16,7 +16,7 @@
               i
             );
           }
-          (video = video[index].src) && video[0] == "h" && open(video);
+          (video = video[index].currentSrc) && video[0] == "h" && open(video);
         }
       }
     }).catch(() => 0);
