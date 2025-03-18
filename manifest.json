@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "vidirect",
+  "version": "0",
+  "description": "Open video in new tab",
+  "icons": {
+    "128": "128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "bg.js"
+  },
+  "action": {}
+}
