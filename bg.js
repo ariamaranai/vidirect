@@ -29,6 +29,6 @@ chrome.runtime.onInstalled.addListener(() =>
     id: "",
     title: "Open video in new tab",
     contexts: ["page", "video"],
-    documentUrlPatterns: ["https://*/*", "https://*/"]
+    documentUrlPatterns: ["https://*/*"]
   })
 );
