@@ -19,7 +19,8 @@ if (i) {
   }
   (video = video[index].currentSrc) && video[0] == "h" && video.pause(open(video));
 }
-}`    }]
+}`    
+      }]
     }).catch(() => 0);
   }
   chrome.action.onClicked.addListener(run);
