@@ -7,8 +7,8 @@
 `{
 let video = document.body.getElementsByTagName("video");
 let i = video.length;
-let index = 0;
 if (i) {
+  let index = 0;
   let maxWidth = 0;
   let width = 0;
   while (
