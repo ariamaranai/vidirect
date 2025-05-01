@@ -15,7 +15,9 @@
       maxWidth < (width = video[--i].offsetWidth) && (maxWidth = width, index = i),
       i
     );
-    (video = video[index]) && video.pause(open(video.currentSrc));
+    (video = video[index]) &&
+    (i = video.currentSrc)[0] == "h" &&
+    video.pause(open(i));
   }
 }`
       }]
