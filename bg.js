@@ -2,10 +2,16 @@
   let run = (a, b) => {
     let tabId = (b || a).id;
     let frameId = b && a.frameId;
-    chrome.userScripts.execute({
-      target: frameId ? { tabId, frameIds: [frameId] } : { tabId, allFrames: !0 },
-      js: [{ code:
-`(() => {
+    chrome.management.getAll(crx => {
+      let tabsCreatedHandler = tab => tab.url || tab.index - (b || a).index - 1 || chrome.runtime.sendMessage(crx.id, tab.id);
+      
+      (crx = crx.find(v => v.name == "kbdvid")) &&
+      chrome.tabs.onCreated.addListener(tabsCreatedHandler);
+    
+      let result = chrome.userScripts.execute({
+        target: frameId ? { tabId, frameIds: [frameId] } : { tabId, allFrames: !0 },
+        js: [{ code:
+`{
   let video = document.body.getElementsByTagName("video");
   let i = video.length;
   if (i) {
@@ -16,22 +22,15 @@
       maxWidth < (width = video[--i].offsetWidth) && (maxWidth = width, index = i),
       i
     );
-    return (video = video[index]) && (i = video.currentSrc)[0] == "h" && (video.pause(), i);
+    (video = video[index]) && (i = video.currentSrc)[0] == "h" && video.pause(open(i));
   }
-})();`
-      }]
-    }).then(results =>
-      (results &&= results[0].result) &&
-      chrome.tabs.create({
-        url: results,
-        index: (b || a).index + 1
-      }, tab =>
-        chrome.management.getAll(crx =>
-          (crx = crx.find(v => v.name == "kbdvid")) &&
-          chrome.runtime.sendMessage(crx.id, tab.id)
-        )
-      )
-    ).catch(() => 0);
+}`
+        }]
+      }).catch(() => 0);
+
+      crx && result.finally(() => chrome.tabs.onCreated.removeListener(tabsCreatedHandler));
+    });
+
   }
   chrome.action.onClicked.addListener(run);
   chrome.contextMenus.onClicked.addListener(run);
