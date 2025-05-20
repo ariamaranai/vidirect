@@ -4,10 +4,7 @@
     let frameId = b && a.frameId;
     chrome.management.getAll(crx => {
       let f = tab => tab.url || tab.index - (b || a).index - 1 || chrome.runtime.sendMessage(crx.id, tab.id);
-      
-      (crx = crx.find(v => v.name == "kbdvid")) &&
-      chrome.tabs.onCreated.addListener(f);
-
+      (crx = crx.find(v => v.name == "kbdvid")) && chrome.tabs.onCreated.addListener(f);
       let result = chrome.userScripts.execute({
         target: frameId ? { tabId, frameIds: [frameId] } : { tabId, allFrames: !0 },
         js: [{ code:
@@ -27,9 +24,7 @@
 }`
         }]
       }).catch(() => 0);
-
-      crx &&
-      result.finally(() => chrome.tabs.onCreated.removeListener(f));
+      crx && result.finally(() => chrome.tabs.onCreated.removeListener(f));
     });
   }
   chrome.action.onClicked.addListener(run);
