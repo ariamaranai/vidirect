@@ -4,10 +4,8 @@
     let frameId = b && a.frameId;
     chrome.management.getAll(crx => {
       let tabsCreatedHandler = tab => tab.url || tab.index - (b || a).index - 1 || chrome.runtime.sendMessage(crx.id, tab.id);
-      
       (crx = crx.find(v => v.name == "kbdvid")) &&
       chrome.tabs.onCreated.addListener(tabsCreatedHandler);
-    
       let result = chrome.userScripts.execute({
         target: frameId ? { tabId, frameIds: [frameId] } : { tabId, allFrames: !0 },
         js: [{ code:
@@ -30,7 +28,6 @@
 
       crx && result.finally(() => chrome.tabs.onCreated.removeListener(tabsCreatedHandler));
     });
-
   }
   chrome.action.onClicked.addListener(run);
   chrome.contextMenus.onClicked.addListener(run);
