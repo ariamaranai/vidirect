@@ -28,7 +28,8 @@
         }]
       }).catch(() => 0);
 
-      crx && result.finally(() => chrome.tabs.onCreated.removeListener(f));
+      crx &&
+      result.finally(() => chrome.tabs.onCreated.removeListener(f));
     });
   }
   chrome.action.onClicked.addListener(run);
