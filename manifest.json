@@ -8,8 +8,8 @@
   },
   "permissions": [
     "contextMenus",
-    "management",
-    "userScripts"
+    "userScripts",
+    "tabs"
   ],
   "host_permissions": [
     "<all_urls>"
