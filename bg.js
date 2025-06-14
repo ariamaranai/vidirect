@@ -1,12 +1,9 @@
 {
-  let run = (a, b) => {
-    let tabId = (b || a).id;
-    let frameId = b && a.frameId;
+  let run = (a, b) =>
     chrome.userScripts.execute({
-      target: frameId ? { tabId, frameIds: [frameId] } : { tabId, allFrames: !0 },
+      target: { tabId: (b || a).id, allFrames: !0 },
       js: [{ file: "video.js" }]
     }).catch(() => 0);
-  }
   chrome.action.onClicked.addListener(run);
   chrome.contextMenus.onClicked.addListener(run);
 }
