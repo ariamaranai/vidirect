@@ -5,7 +5,7 @@
         target: { tabId: (b || a).id, allFrames: !0 },
         js: [{ file: "video.js" }]
       });
-    } catch (e) {}
+    } catch {}
   }
   chrome.action.onClicked.addListener(run);
   chrome.contextMenus.onClicked.addListener(run);
