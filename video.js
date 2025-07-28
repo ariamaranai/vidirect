@@ -6,7 +6,9 @@
     let maxWidth = 0;
     let width = 0;
     while (
-      maxWidth < (width = video[--i].offsetWidth) && (maxWidth = width, index = i),
+      video[--i].readyState &&
+      maxWidth < (width = video[i].offsetWidth) &&
+      (maxWidth = width, index = i),
       i
     );
     (video = video[index]) && (i = video.currentSrc)[0] == "h" && video.pause(open(i));
