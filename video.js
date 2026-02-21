@@ -1,6 +1,6 @@
 {
   let video = document.fullscreenElement || document.scrollingElement;
-  if (video.tagName != "VIDEO") {
+  if (video instanceof HTMLVideoElement) {
     let videos = video.getElementsByTagName("VIDEO");
     let { max, min } = Math;
     let maxVisibleSize = 0;
