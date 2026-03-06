@@ -1,0 +1,1 @@
+document.title = document.body.firstChild.src = location.search.slice(1);
