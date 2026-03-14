@@ -1,7 +1,8 @@
 (() => {
-  let video = document.fullscreenElement || document.scrollingElement;
+  let d = document;
+  let video = d.fullscreenElement || d.scrollingElement;
   if (!(video instanceof HTMLVideoElement)) {
-    let videos = video.getElementsByTagName("VIDEO");
+    let videos = video.getElementsByTagName("video");
     let { max, min } = Math;
     let maxVisibleSize = 0;
     let i = 0;
@@ -17,7 +18,7 @@
       }
       ++i;
     }
-    video?.readyState || (video = video.shadowRoot?.querySelector("VIDEO"));
+    video?.readyState || (video = video.shadowRoot?.querySelector("video"));
   }
   return video?.readyState && (video.pause(open(video.currentSrc)), location.host);
 })();
