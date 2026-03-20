@@ -9,7 +9,7 @@
   "permissions": [
     "contextMenus",
     "downloads",
-    "userScripts",
+    "scripting",
     "tabs"
   ],
   "host_permissions": [
