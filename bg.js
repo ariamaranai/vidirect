@@ -13,15 +13,17 @@
   chrome.contextMenus.onClicked.addListener(run);
 
   chrome.downloads.onCreated.addListener(item => {
-    if (!item.byExtensionId && item.mime.startsWith("video") && (new URL(item.referrer).host) == host) {
-      host = 0;
-      let { id, finalUrl } = item;
-      chrome.downloads.cancel(id);
-      chrome.downloads.erase({ id });
-      chrome.tabs.query({ active: !0, currentWindow: !0 }, tabs =>
-        chrome.tabs.create({ url: "vidirect.mp4.htm?" + finalUrl, index: tabs[0].index + 1 })
-      );
-    }
+    try {
+      if (!item.byExtensionId && item.mime.startsWith("video") && (new URL(item.referrer).host) == host) {
+        host = 0;
+        let { id, finalUrl } = item;
+        chrome.downloads.cancel(id);
+        chrome.downloads.erase({ id });
+        chrome.tabs.query({ active: !0, currentWindow: !0 }, tabs =>
+          chrome.tabs.create({ url: "vidirect.mp4.htm?" + finalUrl, index: tabs[0].index + 1 })
+        );
+      }
+    } catch {}
   });
 }
 chrome.runtime.onInstalled.addListener(() =>
