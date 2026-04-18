@@ -19,10 +19,11 @@
         let { id, finalUrl } = item;
         chrome.downloads.cancel(id);
         chrome.downloads.erase({ id });
-        return chrome.tabs.query({ active: !0, currentWindow: !0 }, tabs =>
+        chrome.tabs.query({ active: !0, currentWindow: !0 }, tabs =>
           chrome.tabs.create({ url: "vidirect.mp4.htm?" + finalUrl, index: tabs[0].index + 1 })
         );
       }
+      return 0;
     } catch {}
   });
 }
