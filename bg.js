@@ -1,6 +1,6 @@
 {
   let host;
-  let run = async (a, b) => {
+  let f = async (a, b) => {
     try {
       return host = (await chrome.scripting.executeScript({
         target: { tabId: (b || a).id, allFrames: !0 },
@@ -9,8 +9,8 @@
       }))[0].result;
     } catch {}
   }
-  chrome.action.onClicked.addListener(run);
-  chrome.contextMenus.onClicked.addListener(run);
+  chrome.action.onClicked.addListener(f);
+  chrome.contextMenus.onClicked.addListener(f);
 
   chrome.downloads.onCreated.addListener(item => {
     try {
